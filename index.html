@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+				<meta charset="UTF-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+				<link rel="stylesheet" href="index.css">
+				<script src="index.js"></script>
+				<title>jarvis</title>
+</head>
+<body>
+<h1 id="jarvis" onclick="document.body.requestFullscreen()">J.A.R.V.I.S</h1>
+<div id="container">
+ <div><h3 id="but">Text : </h3><p id="output"></p></div>
+ <iframe id="iframe"></iframe>
+</div>
+
+
+
+
+<script src="speak.js"></script>
+<script>
+function speak(x){
+responsiveVoice.setDefaultRate(1.15);
+responsiveVoice.speak(x, "UK English Female", {pitch: 0.4});
+}			
+function search(x){
+var link ="https://www.webcrawler.com/serp?q=" + `${x}` + "+&sc=reaFe1_tB3l6yHSsVqAHKsnVFTo-nn9Fcom0WbvdOBSYXgO_kPFAy-XQj05FHg3Pr7qJ2RzSrt960swa-4gYxna5ntAb3h3sXhzfmFMFjka7B0ds6mS88-G9ver6Mu3AHQmDhTjQ2N9j6C6df7zas3KXk2m_6yg2jaIPTfenBXbgzWNXxnq2kTL-NLvoLJKVgc2RqtB1AHcfszw7NSeT9OvbQlWe_8-F5ObFJ5ZfzrSz2Qfp5q4SnC7LorQmdGUqnpaU0Aw86n-fSOs06dXdfBtasHHvSMj2AUdGXHAY6o9mhBtAYVO9___rwUpXisc7UjXCBuyGyveD92CoqmBN5yxKRuHTzPpj8_dGZzxWSvkxYJLFTPinW-HaBJX-jC-lO2PDEshXfvzG155CXzibj5yyvYEnDWfvTkSxBuuKL4kQtvcHThxxnsxwrp1EWdjgCK_Uq_Y469I2ldTyrJr3kFKOh7V5Bd_uIdlNuAaq4cN7iDM7EDw2E9J4rfEY-c1EuFB_3a4RMF01Nw40fgevJTuRGx6xP31bRsDmn7o2asmbvA5jduZEHZdhUYhb2KY_BUE6bdjnCRDhWOSiiezE3S3c257YLmS1ISfYssYHG3fzP5OZMK06PleTTB4xu8GkYNfq3dcLvDPfEbsx_xsvA9j1wKo1EHZYYtQm978JFfaPu1GINTnnAMlcDvY14pZFOQ6eTsoCZOEWfpkTnKhY4Qw0x5DjQVt7MObK4sBS1uffsN-KDgvjp2YBb1cTC5bVYctPNQk60jVbk6Jbzs87w16pnW2JcoWsqik-YAmLwPBnHQjTEZx2DuboXLQqXxWwr0LFlBBp3OyvJdhuzvGTg-ioQkU-EKvAwPyss108kzZGPAaoe5wymbrUqOZz8Ql6a1rW9VM_J---0L27OdFWyr51AcQ1akvyVN0g81U6cPx6X0JiRP6g3GIWnOSw3ZKW5QoL7bTRpqKKffESVjqQYNIZOc0oR1L0TA9ToReBi1LImeLCH-wr1DSXxHoJMzkc-Plc-eX5m4rfD__LWhwvWV0w5sUe5bqbShIAOXxSOKftWGv6IKArKvbv9feZU9scCOqYc_2x_OR_vSeB2YtQbOrjGR1J7MVqCpZ8lxeMbXoWwHzGiLtBwDaTXqqkggk7637APgZc-BkXbjrOLMYx0IPdNSSPGOUKfr5esRmmefBzF0GTVj0yrg3eKLy3EhF23lXpxkBm1yQTpLKVIS8RswfN0iDMkCvgksif9Hsc4YWltqoSXkHDsCGyK6ngxqg8VRQIiHpvMB5KzVPjLV9ah68tMcrOw8MbtiZgmXvzjACJg14t-hkVRxm5pxmYSCHf5CmqHDx7geTYuUvbsy3Lqyvx-QFrh0YLO6H-8iydQ2uYlaCrBM2N_Bv99_E800LR1VOBxO6d6zMtwHbay9VOzpjgO_kxLC9FqMoFmNUtdemMOY5ewiI4EtVRSho4dHKx1o0zPZGLQbIZbP8xBPw4sk0FiUTXENDCX5CPNWU3bF3bzcRzilCe2XMrXrGyCgtYORqyDhPWKtITugoz6PuJFQT16WQv6s6nqf2zfT-vrcHh1SabgqVXkE9slAMHJy0NKwjNZ7JAFOpTTLqVhPlAeL8ILy46i7DwR1cH9ANiKMegedzhaJMO_u-RP5r7J9FPe7Wy59jM0dNHurj_XDB_e1sQ3jn0rAFY2GVzXpxBLNpqi4WU3xn6YZrdeXSHzw8XKQf2skCJP0245I5soxfV1Si0e877agJ70KP1MUDBt2tnizLm0dUnOddw4eaC4P_LQh7WiDl8xh9x9cDOUXRIUtzqPZegv22w282Q-ApY1rdxvsLyoWohYVohtQ8Kdy0P2oE478zJfaKQK9Lrqh6GtAgZjJG_IsoE4R-fkMCRW9OR9beUnJnMf5smM2mmcY33W-Wy_0vSsiWUbdRHI42WnPcLE8XfQQFo4OrPEq7tPKfwuZ9JrcJ96QEJ6R7kTQ";
+document.getElementById('iframe').src = link;
+}
+</script>
+
+
+<script>
+        // Check if the browser supports the SpeechRecognition API
+        if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+
+            const output = document.getElementById('output');
+
+            recognition.continuous = true; // Continuous recognition
+            recognition.interimResults = true; // Get interim results
+
+            recognition.onstart = () => {
+                output.textContent = ' Listening...';
+            };
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[event.results.length - 1][0].transcript;
+                output.textContent = transcript.toLowerCase();
+            };
+            
+            recognition.onend = () => {
+if(output.textContent.includes("wake up")){
+var y = getTimeOfDay();
+speak(`Good ${y} sir, How can i help you?`);
+}
+if(output.textContent =="jarvis"){speak("Yes sir?");}
+
+if(output.textContent.includes("shutdown")){
+speak("ok sir, shutting down the system");
+document.body.classList.add("shut");
+setTimeout(function(){document.body.innerHTML="";leave();}, 1500);}
+
+if(output.textContent.includes("search")){
+var searchText = output.textContent.split("search")[1].trim();search(searchText);speak("Ok sir. searching.");}                   
+            setTimeout(function(){ 
+                output.textContent = 'Speech recognition stopped. Restarting...';
+                recognition.start();
+                }, 1000);
+            };
+
+            recognition.start(); // Start recognition when the page loads
+        } else {
+            alert(' Speech recognition is not supported in this browser.');
+        }
+</script>
+</body>
+</html>
