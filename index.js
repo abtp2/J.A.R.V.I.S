@@ -28,5 +28,5 @@ function getTimeOfDay(currentHour) {
 
 
 function leave(){
-
+window.close();
 }
