@@ -2,25 +2,44 @@
 <html lang="en">
 <head>
 				<meta charset="UTF-8">
-				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+				<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+				<link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet"> <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 				<link rel="stylesheet" href="index.css">
 				<script src="index.js"></script>
-				<title>jarvis</title>
+				<script src="motionDetector.js"></script>
+				<title>Jarvis</title>
 </head>
 <body>
 <h1 id="jarvis" onclick="document.body.requestFullscreen()">J.A.R.V.I.S</h1>
 <div id="container">
  <div><h3 id="but">Text : </h3><p id="output"></p></div>
- <iframe id="iframe"></iframe>
+ <div id="resultBox">
+ </div>
+</div>
+
+<!-- options -->
+<div id="options">
+	  <div><p>Motion Detection</p> <div class="switch" onclick="toggleMotionSwitch(this)"><div class="slider"></div></div>
+	  </div>
+	  <div><p>Earthquake Detection</p><div class="switch" onclick="toggleEarthSwitch(this)"><div class="slider"></div></div>
+	  </div>
 </div>
 
 
 
 
+<button id="torchOnButton">Torch ON</button>
+<button id="torchOffButton">Torch Off</button>
+<!-- alert audio -->
+<audio id="alert" controls>
+	<source src="alarm.mp3">
+</audio>
+
+
 <script src="speak.js"></script>
 <script>
-function speak(x){
 responsiveVoice.setDefaultRate(1.15);
+function speak(x){
 responsiveVoice.speak(x, "UK English Female", {pitch: 0.4});
 }			
 function search(x){
@@ -51,18 +70,25 @@ document.getElementById('iframe').src = link;
             
             recognition.onend = () => {
 if(output.textContent.includes("wake up")){
-var y = getTimeOfDay();
-speak(`Good ${y} sir, How can i help you?`);
+speak(`Good ${shift} sir, How can i help you?`);
 }
 if(output.textContent =="jarvis"){speak("Yes sir?");}
 
 if(output.textContent.includes("shutdown")){
 speak("ok sir, shutting down the system");
 document.body.classList.add("shut");
-setTimeout(function(){document.body.innerHTML="";leave();}, 1500);}
+setTimeout(function(){document.body.innerHTML="";window.close();}, 1500);}
+
+if(output.textContent.includes("memories")){
+document.getElementById("resultBox").innerHTML=`<div id="memories"><h1>Memories</h1></div>`;
+speak("Ok sir. showing.");}
 
 if(output.textContent.includes("search")){
-var searchText = output.textContent.split("search")[1].trim();search(searchText);speak("Ok sir. searching.");}                   
+document.getElementById("resultBox").innerHTML=`<iframe id="iframe"></iframe>`;
+var searchText = output.textContent.split("search")[1].trim();search(searchText);speak("Ok sir. searching.");}
+if(output.textContent.includes("remember")){
+var x = output.textContent.split("remember")[1].trim();remember(x);speak("Ok sir");}
+             
             setTimeout(function(){ 
                 output.textContent = 'Speech recognition stopped. Restarting...';
                 recognition.start();
@@ -73,6 +99,67 @@ var searchText = output.textContent.split("search")[1].trim();search(searchText)
         } else {
             alert(' Speech recognition is not supported in this browser.');
         }
+        
+        
+
+
+
+
+//for motion detection
+var alertAudio = document.getElementById("alert");
+function OnDetection(){
+document.getElementById("resultBox").innerHTML=`<video id="video"></video>`
+document.body.innerHTML +=`<canvas id="motion"></canvas><h1 id="score"></h1>
+`;
+var video = document.getElementById('video');
+var canvas = document.getElementById('motion');
+var score = document.getElementById('score');
+const alertInterval = setInterval(checkAlert, 100);
+function checkAlert(){
+if(score.innerText > 50){
+alertAudio.play();
+document.getElementById("torchOnButton").click();
+clearInterval(alertInterval);
+  setTimeout(function(){
+  OffDetection();
+    setTimeout(function(){
+    OnDetection();
+    }, 200);
+  }, 10000); 
+}}
+
+
+function initSuccess() {
+DiffCamEngine.start();
+}
+function initError() {
+alert('Something went wrong.');
+}
+function capture(payload) {
+score.textContent = payload.score;
+}
+DiffCamEngine.init({
+	video: video,
+	motionCanvas: canvas,
+	initSuccessCallback: initSuccess,
+	initErrorCallback: initError,
+	captureCallback: capture
+});
+}
+function OffDetection(){
+alertAudio.pause();
+document.getElementById("torchOffButton").click();
+document.getElementById("resultBox").innerHTML="";
+var canvas = document.getElementById("motion");
+var score = document.getElementById("score");
+if (canvas && score) {
+    canvas.parentNode.removeChild(canvas);
+    score.parentNode.removeChild(score);
+}
+}
+
+
+
 </script>
 </body>
 </html>

@@ -14,19 +14,68 @@ return fetch(api)
 //weather().then(x=> {});
 
 //morning, night....
-const currentHour = new Date().getHours();
-function getTimeOfDay(currentHour) {
-  if (currentHour >= 6 && currentHour < 12) {
-    return "morning";
-  } else if (currentHour >= 12 && currentHour < 18) {
-    return "afternoon";
-  } else {
-    return "night";
-  }
+var now = new Date(), 
+    hour = now.getHours();
+var shift = " "; 
+shift += (hour >= 4 && hour <= 11) ? "morning" : "",
+shift += (hour >= 12 && hour <= 16) ? "afternoon" : "",
+shift += (hour >= 17 && hour <= 20) ? "evening" : "", shift += (hour >= 21 || hour <= 3) ? "night" : "";
+
+
+
+
+//memory code
+/*
+function remember(x){
+var y = localStorage.getItem("memory");
+var memories =[y];
+memories.push(x);
+localStorage.setItem("memory", memories);
 }
 
+window.onload = function(){
+var y = localStorage.getItem("memory");
+var memories = y.split(", ");
+var x = document.getElementById("memories");
+console.log(memories);
+*/
 
 
-function leave(){
-window.close();
+
+
+const Toast = Swal.mixin({ 
+toast: true, 
+position: "top-end", 
+showConfirmButton: false, 
+timer: 3000, 
+timerProgressBar: true, 
+didOpen: (toast) => { 
+toast.onmouseenter = Swal.stopTimer; toast.onmouseleave = Swal.resumeTimer; 
+}});
+
+function toggleMotionSwitch(element){
+element.classList.toggle('on');
+var switchStatus = element.classList.contains('on'); 
+if (switchStatus){
+Toast.fire({
+icon: "success", 
+title: "Starting Detection in 3secons" 
+});
+setTimeout(function(){OnDetection()}, 3000);
 }
+else{
+OffDetection();
+}}
+
+
+
+
+
+
+
+
+
+
+
+
+
