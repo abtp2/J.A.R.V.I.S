@@ -79,15 +79,23 @@ speak("ok sir, shutting down the system");
 document.body.classList.add("shut");
 setTimeout(function(){document.body.innerHTML="";window.close();}, 1500);}
 
-if(output.textContent.includes("memories")){
-document.getElementById("resultBox").innerHTML=`<div id="memories"><h1>Memories</h1></div>`;
-speak("Ok sir. showing.");}
+if(output.textContent.includes("show memor")){
+document.getElementById("resultBox").innerHTML =`<div id="memories"><h1>Memories</h1></div>`;
+speak("Ok sir. showing.");showMemory();}
+
+if(output.textContent.includes("clear memor")){
+clearMemory();
+}
 
 if(output.textContent.includes("search")){
 document.getElementById("resultBox").innerHTML=`<iframe id="iframe"></iframe>`;
 var searchText = output.textContent.split("search")[1].trim();search(searchText);speak("Ok sir. searching.");}
 if(output.textContent.includes("remember")){
 var x = output.textContent.split("remember")[1].trim();remember(x);speak("Ok sir");}
+
+if(output.textContent.includes("play")){
+var x = new Audio("song1.mp3");speak("Ok sir");x.play();}
+
              
             setTimeout(function(){ 
                 output.textContent = 'Speech recognition stopped. Restarting...';
@@ -121,10 +129,12 @@ alertAudio.play();
 document.getElementById("torchOnButton").click();
 clearInterval(alertInterval);
   setTimeout(function(){
+  if(document.getElementsByClassName("switch")[0].classList.contains('on')){
   OffDetection();
     setTimeout(function(){
     OnDetection();
     }, 200);
+    }
   }, 10000); 
 }}
 

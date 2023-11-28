@@ -23,22 +23,30 @@ shift += (hour >= 17 && hour <= 20) ? "evening" : "", shift += (hour >= 21 || ho
 
 
 
-
-//memory code
-/*
 function remember(x){
 var y = localStorage.getItem("memory");
-var memories =[y];
-memories.push(x);
-localStorage.setItem("memory", memories);
+var list = [];
+if(y){
+list = [y];
+}
+list.push(x);
+localStorage.setItem("memory", list);
 }
 
-window.onload = function(){
+function showMemory(){
 var y = localStorage.getItem("memory");
-var memories = y.split(", ");
-var x = document.getElementById("memories");
-console.log(memories);
-*/
+var memories = document.getElementById("memories");
+if(y){
+var list = y.split(",");
+for (i=0;i<list.length;i++){
+memories.innerHTML +=`<p>${i+1}. ${list[i]}</p>`;
+}
+}}
+
+function clearMemory(){
+localStorage.setItem("memory","");
+showMemory();
+}
 
 
 
@@ -59,7 +67,7 @@ var switchStatus = element.classList.contains('on');
 if (switchStatus){
 Toast.fire({
 icon: "success", 
-title: "Starting Detection in 3secons" 
+title: "Starting in 3 seconds" 
 });
 setTimeout(function(){OnDetection()}, 3000);
 }
